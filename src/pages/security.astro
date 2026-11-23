@@ -1,0 +1,56 @@
+---
+import Shell from "../layouts/Shell.astro";
+---
+<Shell title="Security Policy | Regidi Lab" section="security" description="Security controls, technical scope, and limitations of Regidi Lab">
+  <div class="container content-page privacy-page" lang="en" dir="ltr">
+    <header class="page-heading">
+      <p class="eyebrow">ROUNVER RESEARCH / SECURITY</p>
+      <h1>Security <em>by design</em></h1>
+      <p>Security controls, technical scope, and limitations of Regidi Lab Last updated: November 22, 2026.</p>
+    </header>
+    <p class="privacy-intro">Security is part of this research's goals. This page explains the controls implemented in the proof of concept and their limitations: a public lab is not the same as an independently audited, certified, production-ready identity service.</p>
+    <ol class="privacy-sections">
+      <li id="alcance-seguridad"><span class="mono privacy-number">01</span><div>
+        <h2>Scope of this policy</h2>
+        <p>This policy applies to the Regidi Lab website, its static pages, and the demonstration API operated by Rounver Corp. It describes controls in a proof of concept, not contractual security obligations for a commercial platform.</p>
+        <p>All scenarios use fictional identities and simulated operations. This version has no real human authentication or KYC/KYB verification and does not demonstrate interoperability with independent issuers or receivers.</p>
+      </div></li>
+      <li id="infraestructura"><span class="mono privacy-number">02</span><div>
+        <h2>Infrastructure and platform protection</h2>
+        <p>Regidi Lab can serve the site and run the API on Cloudflare Workers with D1 or on Node.js with SQLite. The database temporarily stores the technical records needed for the demonstration. Public site communications use HTTPS.</p>
+        <p>Access controls protect administrative resources. Availability and physical safeguards depend on the deployment and its providers. Regidi Lab claims no third-party certification.</p>
+      </div></li>
+      <li id="criptografia"><span class="mono privacy-number">03</span><div>
+        <h2>Cryptography and agent identity</h2>
+        <p>The browser generates a P-256 key pair through Web Crypto. The private key is created as non-exportable and remains in the browser; the corresponding public key is registered for the demonstration.</p>
+        <p>The issuer signs delegation credentials with ES256. The simulated receiver verifies both the issuer's signature and the proof that the agent possesses its key, bound to the credential and request details.</p>
+        <p>The current proof-of-possession format is specific to Regidi Lab and should not be represented as a complete implementation of a standardized interoperable protocol.</p>
+      </div></li>
+      <li id="permisos"><span class="mono privacy-number">04</span><div>
+        <h2>Delegation, revocation, and replay prevention</h2>
+        <p>Delegations specify a receiving service, operation, maximum amount, and expiration. Each simulated receiver applies its own policies; a signed permission does not require the receiver to approve an operation.</p>
+        <p>The verification process checks revocation status, proof freshness, and replay. Identifiers of consumed proofs are recorded in the database to support single-use validation.</p>
+      </div></li>
+      <li id="controles-abuso"><span class="mono privacy-number">05</span><div>
+        <h2>Bot and abuse protection</h2>
+        <p>Public installations use Cloudflare Turnstile for demo agent creation. The lab's backend validates the token through Siteverify and checks the expected hostname and action before opening a session. On the Node.js loopback listener, explicitly enabled development mode validates short-lived, single-use challenge tokens locally.</p>
+        <p>Request limits are also applied to reduce abuse and excessive consumption. These controls mitigate risks, but do not guarantee detection of all malicious automation.</p>
+      </div></li>
+      <li id="datos"><span class="mono privacy-number">06</span><div>
+        <h2>Technical data and retention</h2>
+        <p>We do not request real identities, passwords, banking details, or payment information. The database stores session and delegation identifiers, the public part of the agent key, and technical records essential for validating simulated operations.</p>
+        <p>Sessions begin with a five-minute lifetime and, after permission is granted, expire with the selected three-, five-, or fifteen-minute delegation. Logical expiry does not necessarily imply immediate physical removal of all records. More details are in the <a href='/privacy/'>Privacy Policy</a>.</p>
+      </div></li>
+      <li id="vulnerabilidades"><span class="mono privacy-number">07</span><div>
+        <h2>Vulnerabilities and responsible disclosure</h2>
+        <p>If you discover a vulnerability, report it to <a href='mailto:privacy@rounver.com'>privacy@rounver.com</a>, with a technical description and reproduction steps that do not expose other people's information.</p>
+        <p>Please avoid destructive testing, denial-of-service attacks, or disclosure of secrets. We do not currently offer a formal bug bounty or promise financial compensation for reports.</p>
+      </div></li>
+      <li id="incidentes"><span class="mono privacy-number">08</span><div>
+        <h2>Incidents, improvements, and limitations</h2>
+        <p>Following an incident, features may be temporarily suspended, compromised configurations revoked, or fixes published to protect the environment. Legally required notifications will be handled according to the incident's type and scope.</p>
+        <p>Regidi Lab is evolving experimental research. Its controls are not a substitute for an independent audit, comprehensive penetration testing, real human identity verification, or a security assessment of a production deployment.</p>
+      </div></li>
+    </ol>
+  </div>
+</Shell>

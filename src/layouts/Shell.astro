@@ -1,0 +1,169 @@
+---
+import "@fontsource-variable/geist-mono";
+import "../styles/global.css";
+import { Github, ShieldCheck, Languages, ChevronDown } from "lucide-react";
+import { en } from "../i18n/locales/en";
+import { localeOptions } from "../i18n/index";
+interface Props {
+  title: string;
+  section?: string;
+  description?: string;
+}
+const { title, section = "home", description = en["meta.default"] } = Astro.props;
+const links = [
+  { href: "/", key: "home", name: en["nav.home"] },
+  { href: "/lab/", key: "lab", name: en["nav.lab"] },
+  { href: "/architecture/", key: "architecture", name: en["nav.architecture"] },
+  { href: "/research/", key: "research", name: en["nav.research"] },
+];
+const pageTitleKey = (["home","lab","architecture","research","notFound"].includes(section)) ? `title.${section}` : undefined;
+const pageMetaKey = (["home","lab","architecture","research"].includes(section)) ? `meta.${section}` : undefined;
+---
+<!doctype html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} data-i18n-content={pageMetaKey} />
+    <meta name="theme-color" content="#E9E8E2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#171815" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/regidi-favicon.svg" type="image/svg+xml" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title data-i18n={pageTitleKey}>{title}</title>
+  </head>
+  <body>
+    <a class="skip" href="#contenido" data-i18n="skip">{en["skip"]}</a>
+    <header class:list={["site-header", { "site-header--sticky": section !== "lab" }]}>
+      <div class="nav-inner container">
+        <a class="brand" href="/">
+          <img class="brand-mark" src="/regidi-favicon.svg" alt="" width="29" height="29" />
+          <span>Regidi<span class="brand-lab"> Lab</span></span>
+        </a>
+        <nav class="nav-links" aria-label={en["nav.aria"]} data-i18n-aria="nav.aria">
+          {links.map(link => (
+            <a href={link.href} aria-current={section === link.key ? "page" : undefined} data-i18n={`nav.${link.key}`}>{link.name}</a>
+          ))}
+        </nav>
+        <div class="header-actions">
+          <details class="language-switcher">
+            <summary aria-labelledby="language-label language-code">
+              <Languages size={16} aria-hidden="true" />
+              <span id="language-label" data-i18n="lang.label" hidden>{en["lang.label"]}</span>
+              <bdi id="language-code" class="language-code">EN</bdi>
+              <ChevronDown size={13} aria-hidden="true" />
+            </summary>
+            <ul class="language-options">
+              {localeOptions.map(option => (
+                <li><button type="button" data-locale={option.code} lang={option.tag} dir="auto" aria-pressed={option.code === "en"}>{option.name}</button></li>
+              ))}
+            </ul>
+          </details>
+          <a class="header-github" href="https://github.com/rounverr/regidi-poc" target="_blank" rel="noopener noreferrer" aria-label={en["nav.github"]} data-i18n-aria="nav.github"><Github size={19} aria-hidden="true" /><span>GitHub</span></a>
+        </div>
+      </div>
+    </header>
+    <main id="contenido" class="site-main"><slot /></main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="footer-brand" href="https://rounver.com">
+          <img src="/rounver-logo.png" alt="Rounver" width="328" height="132" decoding="async" />
+        </a>
+        <p class="footer-description" data-i18n="footer.description">{en["footer.description"]}</p>
+        <div class="footer-aside">
+          <nav class="footer-legal" aria-label={en["footer.legal"]} data-i18n-aria="footer.legal">
+            <a href="/privacy/" data-i18n="footer.privacy">{en["footer.privacy"]}</a>
+            <a href="/terms/" data-i18n="footer.terms">{en["footer.terms"]}</a>
+            <a href="/security/" data-i18n="footer.security">{en["footer.security"]}</a>
+          </nav>
+          <div class="footer-assurances">
+            <a class="footer-turnstile" href="/privacy/#proteccion-bots"><ShieldCheck size={15} aria-hidden="true" /><span data-i18n="footer.turnstile">{en["footer.turnstile"]}</span></a>
+            <span class="mono footer-version">PoC 0.1</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <aside class="privacy-toast" id="privacy-toast" aria-labelledby="privacy-toast-title" hidden>
+      <span class="privacy-toast-icon" aria-hidden="true"><ShieldCheck size={18} /></span>
+      <div class="privacy-toast-copy">
+        <strong id="privacy-toast-title">Privacy & essential technologies</strong>
+        <p id="privacy-toast-description">We save your language preference and use Cloudflare Turnstile for security. No advertising cookies.</p>
+        <a id="privacy-toast-policy" href="/privacy/#cookies">Privacy policy</a>
+      </div>
+      <button type="button" class="privacy-toast-dismiss" id="privacy-toast-dismiss">Got it</button>
+    </aside>
+    <script>
+      import { detectLocale, getLanguage, localeOptions, setLocale, subscribeLanguage } from "../i18n/index";
+
+      const picker = document.querySelector<HTMLDetailsElement>(".language-switcher")!;
+      const trigger = picker.querySelector("summary")!;
+      const badge = picker.querySelector(".language-code")!;
+      const options = Array.from(picker.querySelectorAll("button"));
+      const refresh = () => {
+        const current = localeOptions.find(option => option.code === getLanguage().locale);
+        badge.textContent = current?.short ?? "EN";
+        options.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.locale === current?.code)));
+      };
+      subscribeLanguage(refresh);
+      // The notice describes essential storage only; it is not permission for optional tracking.
+      const notice = document.querySelector<HTMLElement>("#privacy-toast")!;
+      const noticeTitle = document.querySelector<HTMLElement>("#privacy-toast-title")!;
+      const noticeDescription = document.querySelector<HTMLElement>("#privacy-toast-description")!;
+      const noticePolicy = document.querySelector<HTMLElement>("#privacy-toast-policy")!;
+      const noticeDismiss = document.querySelector<HTMLButtonElement>("#privacy-toast-dismiss")!;
+      const noticeStrings: Record<string, [string, string, string, string]> = {"en":["Privacy & essential technologies","We save your language preference and use Cloudflare Turnstile for security. No advertising cookies.","Got it","Privacy policy"],"es":["Privacidad y tecnologías esenciales","Guardamos tu idioma y usamos Cloudflare Turnstile para seguridad. Sin cookies publicitarias.","Entendido","Política de privacidad"],"pt":["Privacidade e tecnologias essenciais","Salvamos seu idioma e usamos Cloudflare Turnstile para segurança. Sem cookies de publicidade.","Entendi","Política de privacidade"],"de":["Datenschutz & notwendige Technologien","Wir speichern Ihre Sprache und nutzen Cloudflare Turnstile zur Sicherheit. Keine Werbe-Cookies.","Verstanden","Datenschutzerklärung"],"fr":["Confidentialité et technologies essentielles","Nous mémorisons votre langue et utilisons Cloudflare Turnstile pour la sécurité. Aucun cookie publicitaire.","Compris","Politique de confidentialité"],"it":["Privacy e tecnologie essenziali","Salviamo la lingua scelta e usiamo Cloudflare Turnstile per la sicurezza. Nessun cookie pubblicitario.","Ho capito","Informativa sulla privacy"],"ja":["プライバシーと必須技術","言語設定を保存し、Cloudflare Turnstile で保護します。広告 Cookie は使用しません。","了解","プライバシーポリシー"],"hi":["गोपनीयता और आवश्यक तकनीकें","हम आपकी भाषा की पसंद सहेजते हैं और सुरक्षा के लिए Cloudflare Turnstile का उपयोग करते हैं। विज्ञापन कुकी नहीं हैं।","समझ गया","गोपनीयता नीति"],"ar":["الخصوصية والتقنيات الأساسية","نحفظ تفضيل لغتك ونستخدم Cloudflare Turnstile للأمان. لا نستخدم ملفات تعريف ارتباط إعلانية.","فهمت","سياسة الخصوصية"]};
+      const refreshNotice = () => {
+        const [title, description, dismiss, policy] = noticeStrings[getLanguage().locale] ?? noticeStrings.en!;
+        noticeTitle.textContent = title;
+        noticeDescription.textContent = description;
+        noticePolicy.textContent = policy;
+        noticeDismiss.textContent = dismiss;
+      };
+      subscribeLanguage(refreshNotice);
+      refreshNotice();
+      const noticeKey = "regidi-essential-notice-v1";
+      try {
+        if (localStorage.getItem(noticeKey) !== "dismissed") notice.hidden = false;
+      } catch { notice.hidden = false; }
+      noticeDismiss.addEventListener("click", () => {
+        notice.hidden = true;
+        try { localStorage.setItem(noticeKey, "dismissed"); } catch { /* Storage may be unavailable. */ }
+      });
+      void setLocale(detectLocale(), false).catch(() => {});
+
+      const close = () => {
+        trigger.focus();
+        picker.open = false;
+      };
+      options.forEach(button => button.addEventListener("click", () => {
+        const option = localeOptions.find(option => option.code === button.dataset.locale);
+        if (option) void setLocale(option.code).catch(() => {});
+        close();
+      }));
+      picker.addEventListener("keydown", event => {
+        if (event.key === "Escape" && picker.open) {
+          event.preventDefault();
+          close();
+        }
+        if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+          event.preventDefault();
+          picker.open = true;
+          const index = options.findIndex(button => button === document.activeElement);
+          const offset = event.key === "ArrowDown" ? 1 : -1;
+          const next = index < 0
+            ? options.find(button => button.getAttribute("aria-pressed") === "true")
+            : options[(index + offset + options.length) % options.length];
+          next?.focus();
+        }
+      });
+      picker.addEventListener("focusout", event => {
+        if (!picker.contains(event.relatedTarget as Node)) picker.open = false;
+      });
+      document.addEventListener("pointerdown", event => {
+        if (!picker.contains(event.target as Node)) picker.open = false;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+---
+import { ArrowUpRight } from "lucide-react";
+import { en } from "../i18n/locales/en";
+
+interface Step { key: string; title: string; label: string; detail: string; }
+interface Props { title: string; titleKey: string; steps: Step[]; }
+const { title, titleKey, steps } = Astro.props;
+const points = steps.map((_, i) => {
+  const angle = -Math.PI * 0.75 + (2 * Math.PI * i) / steps.length;
+  return { x: 270 + 143 * Math.cos(angle), y: 175 + 143 * Math.sin(angle) };
+});
+const index = (i: number) => String(i + 1).padStart(2, "0");
+---
+<regidi-explorer class="explorer">
+  <div class="explorer-menu">
+    <h2 class="section-label" data-i18n={titleKey}>{title}</h2>
+    <div role="group" aria-label={title} data-i18n-aria={titleKey} class="explorer-steps">
+      {steps.map((step, i) => <button type="button" aria-pressed={i === 0} data-label={step.label} data-i18n-label={`${step.key}.label`}>
+        <span class="mono">{index(i)}</span><span data-i18n={`${step.key}.title`}>{step.title}</span><ArrowUpRight size={16} aria-hidden="true"/>
+      </button>)}
+    </div>
+    <div class="explorer-detail" aria-live="polite" aria-atomic="true">
+      {steps.map((step, i) => <p aria-hidden={i !== 0} data-i18n={`${step.key}.detail`}>{step.detail}</p>)}
+    </div>
+    <noscript><ul>{steps.slice(1).map(step => <li>{step.title} · {step.detail}</li>)}</ul></noscript>
+  </div>
+  <figure class="instrument" aria-hidden="true">
+    <figcaption><span class="instrument-cross">+</span> <span data-i18n="diagram.flow">{en["diagram.flow"]}</span></figcaption>
+    <svg viewBox="0 0 540 350" class="dial">
+      <g class="guides" fill="none">
+        <path d="M30 175H510M270 6V344"/>
+        <circle cx="270" cy="175" r="143"/><circle cx="270" cy="175" r="99"/>
+        {Array.from({length:72},(_,i)=><path d={i%6===0?"M270 28v8":"M270 31v3"} transform={`rotate(${i*5} 270 175)`}/>)}
+      </g>
+      {steps.map((step,i) => <g class:list={["dial-route", {active:i===0}]}>
+        <path d={`M270 175L${points[i]!.x} ${points[i]!.y}`}/>
+        <circle cx={points[i]!.x} cy={points[i]!.y} r="9"/>
+        <text x={points[i]!.x} y={points[i]!.y+(points[i]!.y<175?-18:25)} data-i18n={`${step.key}.label`}>{step.label}</text>
+      </g>)}
+      <circle class="dial-core" cx="270" cy="175" r="67"/>
+      <text x="270" y="161" class="dial-index">{index(0)} / {String(steps.length).padStart(2,"0")}</text>
+      <text x="270" y="187" class="dial-name">{steps[0]?.label}</text>
+    </svg>
+  </figure>
+</regidi-explorer>
+<script>
+  class RegidiExplorer extends HTMLElement {
+    private updateActive = () => {
+      const selected = this.querySelector<HTMLButtonElement>('button[aria-pressed="true"]');
+      const label = selected?.dataset.label;
+      if (label) {
+        const text = this.querySelector(".dial-name");
+        if (text) text.textContent = label;
+      }
+    };
+    connectedCallback() {
+      const buttons = Array.from(this.querySelectorAll<HTMLButtonElement>("button"));
+      const routes = this.querySelectorAll(".dial-route");
+      const descriptions = this.querySelectorAll(".explorer-detail p");
+      const select = (active: number) => {
+        const button = buttons[active];
+        if (!button) return;
+        buttons.forEach((item, i) => {
+          item.setAttribute("aria-pressed", String(i === active));
+          descriptions[i]?.setAttribute("aria-hidden", String(i !== active));
+          routes[i]?.classList.toggle("active", i === active);
+        });
+        this.updateActive();
+        this.querySelector(".dial-index")!.textContent = [active + 1, buttons.length].map(n => String(n).padStart(2, "0")).join(" / ");
+      };
+      buttons.forEach((button, i) => {
+        button.onpointerenter = () => select(i);
+        button.onfocus = () => select(i);
+        button.onclick = () => select(i);
+        button.onkeydown = (event) => {
+          const offset = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[event.key];
+          if (!offset) return;
+          event.preventDefault();
+          buttons[(i + buttons.length + offset) % buttons.length]?.focus();
+        };
+      });
+      document.addEventListener("regidi:languagechange", this.updateActive);
+    }
+    disconnectedCallback() {
+      document.removeEventListener("regidi:languagechange", this.updateActive);
+    }
+  }
+  if (!customElements.get("regidi-explorer")) customElements.define("regidi-explorer", RegidiExplorer);
+</script>

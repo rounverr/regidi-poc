@@ -1,0 +1,21 @@
+---
+import Shell from "../layouts/Shell.astro";
+import { ArrowRight } from "lucide-react";
+import { en } from "../i18n/locales/en";
+---
+<Shell title={en["title.research"]} section="research" description={en["meta.research"]}>
+  <div class="container content-page">
+    <header class="page-heading">
+      <p class="eyebrow">ROUNVER RESEARCH</p>
+      <h1><span data-i18n="research.title1">{en["research.title1"]}</span> <em data-i18n="research.title2">{en["research.title2"]}</em></h1>
+      <p data-i18n="research.lead">{en["research.lead"]}</p>
+    </header>
+    <div class="prose-grid">
+      <section class="feature"><h2 data-i18n="research.feature1.title">{en["research.feature1.title"]}</h2><p data-i18n="research.feature1.detail">{en["research.feature1.detail"]}</p></section>
+      <section class="feature"><h2 data-i18n="research.feature2.title">{en["research.feature2.title"]}</h2><p data-i18n="research.feature2.detail">{en["research.feature2.detail"]}</p></section>
+    </div>
+    <div class="hero-actions content-cta">
+      <a class="button primary" href="/lab/"><span data-i18n="home.open">{en["home.open"]}</span> <ArrowRight size={17} aria-hidden="true" /></a>
+    </div>
+  </div>
+</Shell>

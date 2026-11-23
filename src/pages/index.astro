@@ -1,0 +1,44 @@
+---
+import Shell from "../layouts/Shell.astro";
+import FlowExplorer from "../components/FlowExplorer.astro";
+import { ArrowRight, Check, Terminal } from "lucide-react";
+import { en } from "../i18n/locales/en";
+const steps = [1,2,3,4].map(n => ({
+  key: `home.step${n}`,
+  title: en[`home.step${n}.title` as keyof typeof en],
+  label: en[`home.step${n}.label` as keyof typeof en],
+  detail: en[`home.step${n}.detail` as keyof typeof en],
+}));
+---
+<Shell title={en["title.home"]} section="home" description={en["meta.home"]}>
+  <section class="container hero">
+    <p class="eyebrow" data-i18n="home.eyebrow">{en["home.eyebrow"]}</p>
+    <div class="hero-copy">
+      <h1><span data-i18n="home.title1">{en["home.title1"]}</span><br/><em data-i18n="home.title2">{en["home.title2"]}</em></h1>
+      <p class="hero-description" data-i18n="home.lead">{en["home.lead"]}</p>
+      <div class="hero-actions">
+        <a class="button primary" href="/lab/"><span data-i18n="home.open">{en["home.open"]}</span> <ArrowRight size={16} aria-hidden="true" /></a>
+        <a class="text-link" href="/architecture/" data-i18n="home.arch">{en["home.arch"]}</a>
+      </div>
+      <p class="hero-note" data-i18n="home.note">{en["home.note"]}</p>
+    </div>
+  </section>
+  <div class="container"><FlowExplorer title={en["home.explorer"]} titleKey="home.explorer" steps={steps}/></div>
+  <section class="container example-section" aria-label={en["home.example"]} data-i18n-aria="home.example">
+    <div class="hero-terminal">
+      <div class="terminal-header"><span><Terminal size={16} aria-hidden="true" /> <span data-i18n="home.example">{en["home.example"]}</span></span><span class="mono terminal-tag" data-i18n="service.aero">{en["service.aero"]}</span></div>
+      <div class="terminal-body">
+        <div class="terminal-request">
+          <div><span class="muted" data-i18n="home.request">{en["home.request"]}</span><strong data-i18n="home.booking">{en["home.booking"]}</strong></div>
+          <div class="terminal-amount"><span class="muted" data-i18n="home.amount">{en["home.amount"]}</span><strong class="mono" data-i18n-usd="650">USD 650</strong></div>
+        </div>
+        <ul class="terminal-checks">
+          <li><Check size={14} aria-hidden="true" /> <span data-i18n="home.check1">{en["home.check1"]}</span></li>
+          <li><Check size={14} aria-hidden="true" /> <span data-i18n="home.check2">{en["home.check2"]}</span></li>
+          <li><Check size={14} aria-hidden="true" /> <span data-i18n="home.check3">{en["home.check3"]}</span></li>
+        </ul>
+        <div class="terminal-outcome"><span class="pill pass"><span class="pill-dot" aria-hidden="true"></span><span data-i18n="home.allowed">{en["home.allowed"]}</span></span><span class="muted mono" data-i18n="home.receiverPolicy">{en["home.receiverPolicy"]}</span></div>
+      </div>
+    </div>
+  </section>
+</Shell>

@@ -1,0 +1,12 @@
+---
+import Shell from "../layouts/Shell.astro";
+import Lab from "../components/Lab";
+import { en } from "../i18n/locales/en";
+import "../styles/lab.css";
+---
+<Shell title={en["title.lab"]} section="lab" description={en["meta.lab"]}>
+  <div class="container lab-page">
+    <Lab client:load />
+    <noscript><p class="form-error" data-i18n="lab.noscript">{en["lab.noscript"]}</p></noscript>
+  </div>
+</Shell>

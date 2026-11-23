@@ -1,0 +1,70 @@
+---
+import Shell from "../layouts/Shell.astro";
+---
+<Shell title="Privacy Policy | Regidi Lab" section="privacy" description="How Regidi Lab handles technical data and protects privacy in its proof of concept">
+  <div class="container content-page privacy-page" lang="en" dir="ltr">
+    <header class="page-heading">
+      <p class="eyebrow">ROUNVER RESEARCH / PRIVACY</p>
+      <h1>Privacy <em>by design</em></h1>
+      <p>How Regidi Lab handles technical data and protects privacy in its proof of concept Last updated: November 22, 2026.</p>
+    </header>
+    <p class="privacy-intro">Regidi Lab is an experimental proof of concept developed by Rounver Corp. It does not require personal accounts or process actual financial transactions. This policy explains the technical data needed for the demonstration, how they are used, and the measures used to protect the lab.</p>
+    <ol class="privacy-sections">
+      <li id="informacion-recopilada"><span class="mono privacy-number">01</span><div>
+        <h2>Information we collect</h2>
+        <p>We do not ask for real names, email addresses, identification documents, passwords, banking credentials, or personal financial information to use the lab.</p>
+        <p>When a test agent is created, random identifiers, a public cryptographic key, and technical session data are generated. The database temporarily stores the public key, its fingerprint, the agent identifier, the session-token hash, delegation identifiers, and technical records of cryptographic proofs needed to check permissions and revocations. The agent's private key stays in the browser and is never sent to the server.</p>
+        <p>Infrastructure and security providers may process technical connection and security data, such as IP addresses and request metadata. We do not deliberately use that information to identify people experimenting with the lab.</p>
+      </div></li>
+      <li id="uso-datos"><span class="mono privacy-number">02</span><div>
+        <h2>How we use technical data</h2>
+        <p>Technical data support the demonstration, signature and authorization checks, replay prevention, request limits, and service protection. We also maintain aggregate counters for completed actions in Steps 1, 2, and 3, along with the date and time of the latest interaction in Argentina.</p>
+        <p>We do not use the lab for personalized advertising, data sales, or commercial visitor tracking. Counters include repeated processed interactions, but do not identify people or agents or maintain an individual event history.</p>
+      </div></li>
+      <li id="cookies"><span class="mono privacy-number">03</span><div>
+        <h2>Cookies and applicable cookie laws</h2>
+        <p>Regidi Lab does not require a user account or use advertising cookies. It uses local storage to remember your language preference and whether you dismissed the essential-technology notice. The demonstration's interactive state remains in the browser tab. On public installations, Cloudflare Turnstile may use cookies or equivalent technologies strictly related to security and abuse prevention.</p>
+        <p>This notice is informational, not consent to optional tracking: the lab does not currently use optional analytics or advertising technologies. You can clear saved preferences in your browser settings. If we introduce technologies requiring consent, we will request consent before enabling them.</p>
+      </div></li>
+      <li id="transferencias"><span class="mono privacy-number">04</span><div>
+        <h2>Data sharing and transfers</h2>
+        <p>Rounver Corp. operates the official Regidi Lab installation. The proof of concept can run on Cloudflare Workers with D1 or on Node.js with SQLite. Infrastructure and security providers may process technical information in other jurisdictions under their data-protection terms and safeguards.</p>
+        <p>We do not sell visitor data or share them with advertisers or data brokers. We may disclose information when required by applicable law.</p>
+      </div></li>
+      <li id="proteccion-bots"><span class="mono privacy-number">05</span><div>
+        <h2>Bot protection and security checks</h2>
+        <p>Public installations use Cloudflare Turnstile to protect demo agent creation. Its invisible check may run before the visitor selects “Create agent.” Turnstile evaluates technical signals to help detect automated traffic. The lab's backend validates the token before opening a session. This check does not establish the visitor's or agent's real-world identity.</p>
+        <p>When the loopback development challenge is explicitly enabled, Node.js validates single-use tokens without contacting Turnstile. The <a href='https://www.cloudflare.com/turnstile-privacy-policy/' target='_blank' rel='noopener noreferrer'>Turnstile privacy notice</a> describes data processing by that service.</p>
+      </div></li>
+      <li id="preferencias"><span class="mono privacy-number">06</span><div>
+        <h2>User preferences</h2>
+        <p>Regidi Lab offers English (US), Latin American Spanish, Portuguese, German, French, Italian, Japanese, Hindi, and Arabic. The interface can detect a supported browser language; otherwise, English is used. A language selected manually is saved in your browser's local storage so it remains selected on future visits, without requiring an account.</p>
+        <p>The site's light or dark appearance follows your browser or device preference and does not require a personal profile. You can clear stored language preferences in your browser settings.</p>
+      </div></li>
+      <li id="california"><span class="mono privacy-number">07</span><div>
+        <h2>California privacy rights (CCPA/CPRA)</h2>
+        <p>To the extent California privacy law applies, residents may have rights to information, access, deletion, correction, and restriction of certain uses of personal information. We do not sell personal information or share it for cross-context behavioral advertising.</p>
+        <p>Because the lab does not require accounts or identification, we may be unable to associate an anonymous session with a particular person when responding to an individual request.</p>
+      </div></li>
+      <li id="rgpd"><span class="mono privacy-number">08</span><div>
+        <h2>European Union privacy rights (GDPR)</h2>
+        <p>Where the General Data Protection Regulation applies, individuals may have rights of access, rectification, erasure, restriction, objection, and data portability, as appropriate, as well as the right to lodge a complaint with a competent supervisory authority.</p>
+        <p>Technical processing needed to operate and protect the lab serves the purposes described in this policy and, where appropriate, legitimate interests in service security and operation. Requests will be evaluated based on the information actually available and applicable law.</p>
+      </div></li>
+      <li id="seguridad-conservacion"><span class="mono privacy-number">09</span><div>
+        <h2>Security and retention</h2>
+        <p>Sessions begin with a five-minute lifetime. When a delegation is issued, the session's expiry is aligned with the selected three-, five-, or fifteen-minute permission. Restarting deletes the previous session and its associated proofs; expired technical records may also be purged later through maintenance. Session expiry does not necessarily mean that all database rows are physically deleted immediately.</p>
+        <p>Technical metrics and infrastructure operational logs may have separate provider retention periods. Simulated operations do not execute actual payments or bookings.</p>
+      </div></li>
+      <li id="derechos-legales"><span class="mono privacy-number">10</span><div>
+        <h2>Your legal rights</h2>
+        <p>You retain the rights granted by the data-protection laws applicable in your jurisdiction. To submit questions or requests concerning this policy, use the privacy contact below. The response will depend on the relevant legal scope and whether the requested data can technically be identified.</p>
+      </div></li>
+      <li id="contacto"><span class="mono privacy-number">11</span><div>
+        <h2>Contact and updates</h2>
+        <p>Project operator: Rounver Corp., Delaware, United States. Privacy contact: <a href='mailto:privacy@rounver.com'>privacy@rounver.com</a>.</p>
+        <p>We may update this policy as the proof of concept evolves. The revision date will appear at the beginning of this page.</p>
+      </div></li>
+    </ol>
+  </div>
+</Shell>

@@ -1,0 +1,3 @@
+# Local Worker secret values. Use a separate generated P-256 issuer key.
+ISSUER_PRIVATE_JWK=
+TURNSTILE_SECRET=

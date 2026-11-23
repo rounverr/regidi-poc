@@ -1,0 +1,28 @@
+---
+import Shell from "../layouts/Shell.astro";
+import FlowExplorer from "../components/FlowExplorer.astro";
+import { ArrowRight } from "lucide-react";
+import { en } from "../i18n/locales/en";
+const nodes = [1,2,3,4,5].map(n => ({
+  key: `architecture.step${n}`,
+  title: en[`architecture.step${n}.title` as keyof typeof en],
+  label: en[`architecture.step${n}.label` as keyof typeof en],
+  detail: en[`architecture.step${n}.detail` as keyof typeof en],
+}));
+---
+<Shell title={en["title.architecture"]} section="architecture" description={en["meta.architecture"]}>
+  <div class="container content-page">
+    <header class="page-heading">
+      <p class="eyebrow" data-i18n="architecture.eyebrow">{en["architecture.eyebrow"]}</p>
+      <h1><span data-i18n="architecture.title1">{en["architecture.title1"]}</span> <em data-i18n="architecture.title2">{en["architecture.title2"]}</em></h1>
+      <p data-i18n="architecture.lead">{en["architecture.lead"]}</p>
+    </header>
+    <FlowExplorer title={en["architecture.explorer"]} titleKey="architecture.explorer" steps={nodes}/>
+    <div class="prose-grid">
+      <section class="feature"><h2 data-i18n="architecture.feature1.title">{en["architecture.feature1.title"]}</h2><p data-i18n="architecture.feature1.detail">{en["architecture.feature1.detail"]}</p><a class="text-link" href="/api/issuer/jwks"><span data-i18n="architecture.issuer">{en["architecture.issuer"]}</span> <ArrowRight size={14} aria-hidden="true" /></a></section>
+      <section class="feature"><h2 data-i18n="architecture.feature2.title">{en["architecture.feature2.title"]}</h2><p data-i18n="architecture.feature2.detail">{en["architecture.feature2.detail"]}</p></section>
+      <section class="feature"><h2 data-i18n="architecture.feature3.title">{en["architecture.feature3.title"]}</h2><p data-i18n="architecture.feature3.detail">{en["architecture.feature3.detail"]}</p></section>
+    </div>
+    <a class="button primary content-cta" href="/lab/"><span data-i18n="architecture.try">{en["architecture.try"]}</span> <ArrowRight size={17} aria-hidden="true" /></a>
+  </div>
+</Shell>

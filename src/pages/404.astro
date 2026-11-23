@@ -1,0 +1,13 @@
+---
+import Shell from "../layouts/Shell.astro";
+import { en } from "../i18n/locales/en";
+---
+<Shell title={en["title.notFound"]} section="notFound" description={en["meta.notFound"]}>
+  <div class="container content-page">
+    <header class="page-heading">
+      <p class="eyebrow mono">404</p>
+      <h1 data-i18n="notFound.title">{en["notFound.title"]}</h1>
+    </header>
+    <a class="button primary content-cta" href="/" data-i18n="notFound.back">{en["notFound.back"]}</a>
+  </div>
+</Shell>

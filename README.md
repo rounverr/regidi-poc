@@ -16,7 +16,7 @@
 
 Regidi PoC is an open-source research demonstration created by **Rounver Corp. / Rounver Research**. It explores **cryptographic AI agent identity**, **scoped human delegation**, and **receiver-side verification** using simulated operations. It is not the full Regidi-ID protocol or a certified production identity platform.
 
-**Explore the official interactive lab:** https://identity.rounver.com/lab/ · **Regidi-ID overview:** https://rounver.com/regidi-id
+**Explore the official interactive lab:** https://identity.rounver.com/lab/ · **Regidi-ID overview:** https://rounver.com/regidi-id · **[Technical White Paper (DOI)](https://doi.org/10.5281/zenodo.24469990)**
 
 ## What it demonstrates
 

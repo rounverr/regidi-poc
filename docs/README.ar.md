@@ -16,7 +16,7 @@
 
 Regidi PoC عرض بحثي مفتوح المصدر من **Rounver Corp. / Rounver Research**. يستكشف **الهوية المشفّرة لوكلاء الذكاء الاصطناعي** و**التفويض البشري محدود النطاق** و**التحقق لدى الجهة المستقبِلة** باستخدام عمليات محاكاة. لا يمثل بروتوكول Regidi-ID الكامل ولا منصة هوية معتمدة للإنتاج.
 
-**المختبر التفاعلي الرسمي:** https://identity.rounver.com/lab/ · **نظرة عامة على Regidi-ID:** https://rounver.com/regidi-id
+**المختبر التفاعلي الرسمي:** https://identity.rounver.com/lab/ · **نظرة عامة على Regidi-ID:** https://rounver.com/regidi-id · **[الورقة البيضاء التقنية (DOI)](https://doi.org/10.5281/zenodo.24469990)**
 
 ## ما الذي يوضحه؟
 

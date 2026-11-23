@@ -16,7 +16,7 @@
 
 Regidi PoCは**Rounver Corp. / Rounver Research**によるオープンソースの研究用デモです。模擬操作を通じて、**AIエージェントの暗号学的ID**、**人による限定的な権限委譲**、**受信側での検証**を示します。Regidi-IDプロトコル全体の実装ではなく、認証済みの本番用ID基盤でもありません。
 
-**公式インタラクティブラボ:** https://identity.rounver.com/lab/ · **Regidi-ID概要:** https://rounver.com/regidi-id
+**公式インタラクティブラボ:** https://identity.rounver.com/lab/ · **Regidi-ID概要:** https://rounver.com/regidi-id · **[技術ホワイトペーパー（DOI）](https://doi.org/10.5281/zenodo.24469990)**
 
 ## デモで示す機能
 

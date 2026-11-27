@@ -12,13 +12,13 @@
 
 ---
 
-## About the project
+## <picture><img src="docs/assets/icons/book.svg" width="24" height="24" alt=""></picture> About the project
 
 Regidi PoC is an open-source research demonstration created by **Rounver Corp. / Rounver Research**. It explores **cryptographic AI agent identity**, **scoped human delegation**, and **receiver-side verification** using simulated operations. It is not the full Regidi-ID protocol or a certified production identity platform.
 
 **Explore the official interactive lab:** https://identity.rounver.com/lab/ · **Regidi-ID overview:** https://rounver.com/regidi-id · **[Technical White Paper (DOI)](https://doi.org/10.5281/zenodo.24469990)**
 
-## What it demonstrates
+## <picture><img src="docs/assets/icons/flask.svg" width="24" height="24" alt=""></picture> What it demonstrates
 
 - **Browser-held P-256 keys.** The private signing key is generated as non-exportable and stays in the browser tab.
 - **Signed delegation.** A demo issuer grants scoped ES256 credentials, constrained by service, operation, amount and duration.
@@ -27,7 +27,7 @@ Regidi PoC is an open-source research demonstration created by **Rounver Corp. /
 - **Stateful security.** Atomic proof consumption, replay prevention, grant replacement, revocation and expiration.
 - **Two compatible runtimes.** Node.js + native SQLite or Cloudflare Workers + D1, sharing the API, SQL and domain logic.
 
-## Architecture
+## <picture><img src="docs/assets/icons/layers.svg" width="24" height="24" alt=""></picture> Architecture
 
 ```mermaid
 flowchart TB
@@ -42,7 +42,7 @@ flowchart TB
     sqlite --> db2[("SQLite file")]
 ```
 
-## End-to-end flow
+## <picture><img src="docs/assets/icons/workflow.svg" width="24" height="24" alt=""></picture> End-to-end flow
 
 ```mermaid
 sequenceDiagram
@@ -72,7 +72,7 @@ sequenceDiagram
     Browser->>API: Revoke current grant
     API->>DB: Record revocation
 ```
-## Quick start: Node.js + SQLite
+## <picture><img src="docs/assets/icons/terminal.svg" width="24" height="24" alt=""></picture> Quick start: Node.js + SQLite
 
 Requires **Node.js 24**. Node + SQLite needs at least **24.6**; **24.22+** is recommended for the complete toolchain.
 
@@ -89,7 +89,7 @@ npm run dev
 
 Open **http://127.0.0.1:8787/lab/**. No Cloudflare account is needed. The local challenge works only when `NODE_ENV=development`, `REGIDI_CHALLENGE=development`, and the listener is bound to `127.0.0.1`.
 
-## Cloudflare Workers + D1 (optional)
+## <picture><img src="docs/assets/icons/cloud.svg" width="24" height="24" alt=""></picture> Cloudflare Workers + D1 (optional)
 
 ```bash
 npm ci
@@ -101,7 +101,7 @@ npm test
 
 For interactive local Worker mode, configure `.dev.vars` from `.dev.vars.example`, generate a separate issuer key, and configure a Turnstile widget authorized for the local hostname. Pass `PUBLIC_TURNSTILE_SITE_KEY` at build time and the matching `REGIDI_PUBLIC_ORIGIN`. Then run `npm run dev:cloudflare`. Production deployments require explicit Worker, account, D1 and limiter settings; see `.env.example` and `cloudflare.config.ts`. The deployment preflight intentionally requires an existing target and does not provision infrastructure.
 
-## Configuration reference
+## <picture><img src="docs/assets/icons/settings.svg" width="24" height="24" alt=""></picture> Configuration reference
 
 | Variable | Meaning |
 |---|---|
@@ -115,7 +115,7 @@ For interactive local Worker mode, configure `.dev.vars` from `.dev.vars.example
 | `REGIDI_ISSUER`, `REGIDI_AIR_AUDIENCE`, `REGIDI_BANK_AUDIENCE` | Optional issuer/audience identifiers |
 | `CLOUDFLARE_ACCOUNT_ID`, `REGIDI_WORKER_NAME`, `REGIDI_D1_NAME`, `REGIDI_D1_ID`, `REGIDI_RATE_NAMESPACE` | Explicit Cloudflare deployment targets |
 
-## Checks
+## <picture><img src="docs/assets/icons/check.svg" width="24" height="24" alt=""></picture> Checks
 
 ```bash
 npm run check
@@ -127,7 +127,7 @@ npm run audit:deps
 
 `npm test` runs both builds and the automated test suites. There are no required GitHub Actions or automatic publishing pipelines.
 
-## Deployment and security limitations
+## <picture><img src="docs/assets/icons/shield.svg" width="24" height="24" alt=""></picture> Deployment and security limitations
 
 > **Security scope:** This is an educational proof of concept. It uses fictional identities and simulated banking/airline operations, does not perform KYC/KYB, and must not be treated as a certified identity service. Public instances require HTTPS and Cloudflare Turnstile. Local loopback development uses an explicitly enabled single-use challenge.
 
@@ -136,17 +136,17 @@ npm run audit:deps
 - **Cryptography:** Issuer keys are server-side. Do not commit `.env`, `.dev.vars`, database files or generated private JWKs.
 - **Verification:** Real hosted Turnstile integration requires operator-specific validation. Local automated suites mock Siteverify.
 
-## Policies for independent deployments
+## <picture><img src="docs/assets/icons/scale.svg" width="24" height="24" alt=""></picture> Policies for independent deployments
 
 The included privacy policy, terms and security policy apply to the **official installation operated by Rounver Corp.** Independent operators must adapt them to their own identity, infrastructure, data processing and legal duties.
 
-## Maintenance and contributions
+## <picture><img src="docs/assets/icons/users.svg" width="24" height="24" alt=""></picture> Maintenance and contributions
 
 The original software and technical documentation are licensed under [MIT](LICENSE). Rounver Corp. exclusively maintains the official upstream project. External pull requests are **not accepted**; [Issues](https://github.com/rounverr/regidi-poc/issues) may be used to report defects. MIT permits third-party forks and reuse under its terms, without requiring upstream to accept changes.
 
 The original logos and graphics may be redistributed **with this PoC and attribution**, subject to [third-party and brand notices](THIRD_PARTY_NOTICES.md). Font and dependency licenses remain applicable.
 
-## Credits
+## <picture><img src="docs/assets/icons/award.svg" width="24" height="24" alt=""></picture> Credits
 
 Created and maintained by **Rounver Corp.** through **Rounver Research**. [Rounver](https://rounver.com/) · [Regidi-ID](https://rounver.com/regidi-id) · [Official Lab](https://identity.rounver.com/).
 

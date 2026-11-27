@@ -12,13 +12,13 @@
 
 ---
 
-## Über das Projekt
+## <picture><img src="assets/icons/book.svg" width="24" height="24" alt=""></picture> Über das Projekt
 
 Regidi PoC ist ein Open-Source-Forschungsdemonstrator der **Rounver Corp. / Rounver Research**. Das Projekt veranschaulicht **kryptografische Identität von KI-Agenten**, **begrenzt delegierte menschliche Berechtigungen** und **Prüfungen durch empfangende Dienste** anhand simulierter Vorgänge. Es ist weder das vollständige Regidi-ID-Protokoll noch eine zertifizierte Identitätsplattform für den Produktivbetrieb.
 
 **Offizielles interaktives Labor:** https://identity.rounver.com/lab/ · **Regidi-ID-Überblick:** https://rounver.com/regidi-id · **[Technisches White Paper (DOI)](https://doi.org/10.5281/zenodo.24469990)**
 
-## Demonstrierte Funktionen
+## <picture><img src="assets/icons/flask.svg" width="24" height="24" alt=""></picture> Demonstrierte Funktionen
 
 - **P-256-Schlüssel im Browser.** Der private Signaturschlüssel ist nicht exportierbar und bleibt im Browser-Tab.
 - **Signierte Delegation.** Ein Demo-Aussteller erzeugt ES256-Zugangsnachweise mit Beschränkungen für Dienst, Vorgang, Betrag und Dauer.
@@ -27,7 +27,7 @@ Regidi PoC ist ein Open-Source-Forschungsdemonstrator der **Rounver Corp. / Roun
 - **Zustandsbasierte Sicherheit.** Atomare Verwendung von Nachweisen, Replay-Schutz, Ersetzen von Berechtigungen, Widerruf und Ablauf.
 - **Zwei kompatible Laufzeitumgebungen.** Node.js mit nativem SQLite oder Cloudflare Workers mit D1; API, SQL und Domänenlogik werden gemeinsam genutzt.
 
-## Architektur
+## <picture><img src="assets/icons/layers.svg" width="24" height="24" alt=""></picture> Architektur
 
 ```mermaid
 flowchart TB
@@ -42,7 +42,7 @@ flowchart TB
     sqlite --> db2[("SQLite file")]
 ```
 
-## Ablauf von Anfang bis Ende
+## <picture><img src="assets/icons/workflow.svg" width="24" height="24" alt=""></picture> Ablauf von Anfang bis Ende
 
 ```mermaid
 sequenceDiagram
@@ -73,7 +73,7 @@ sequenceDiagram
     API->>DB: Record revocation
 ```
 
-## Schnellstart: Node.js + SQLite
+## <picture><img src="assets/icons/terminal.svg" width="24" height="24" alt=""></picture> Schnellstart: Node.js + SQLite
 
 Benötigt **Node.js 24**. Node + SQLite erfordert mindestens **24.6**; **24.22+** wird für die gesamte Toolchain empfohlen.
 
@@ -90,7 +90,7 @@ npm run dev
 
 Öffne **http://127.0.0.1:8787/lab/**. Ein Cloudflare-Konto ist nicht erforderlich. Die lokale Challenge funktioniert nur mit `NODE_ENV=development`, `REGIDI_CHALLENGE=development` und einem Listener auf `127.0.0.1`.
 
-## Cloudflare Workers + D1 (optional)
+## <picture><img src="assets/icons/cloud.svg" width="24" height="24" alt=""></picture> Cloudflare Workers + D1 (optional)
 
 ```bash
 npm ci
@@ -102,7 +102,7 @@ npm test
 
 Für den lokalen Worker-Betrieb `.dev.vars` aus `.dev.vars.example` erstellen, einen separaten Ausstellerschlüssel erzeugen und ein Turnstile-Widget für den lokalen Host einrichten. `PUBLIC_TURNSTILE_SITE_KEY` beim Build und das passende `REGIDI_PUBLIC_ORIGIN` angeben. Danach `npm run dev:cloudflare` ausführen. Produktive Deployments benötigen explizite Worker-, Konto-, D1- und Limiter-Ziele; siehe `.env.example` und `cloudflare.config.ts`. Der Preflight verlangt bestehende Ressourcen und legt keine Infrastruktur an.
 
-## Konfigurationsreferenz
+## <picture><img src="assets/icons/settings.svg" width="24" height="24" alt=""></picture> Konfigurationsreferenz
 
 | Variable | Bedeutung |
 |---|---|
@@ -116,7 +116,7 @@ Für den lokalen Worker-Betrieb `.dev.vars` aus `.dev.vars.example` erstellen, e
 | `REGIDI_ISSUER`, `REGIDI_AIR_AUDIENCE`, `REGIDI_BANK_AUDIENCE` | Optionale Aussteller- und Audience-Kennungen |
 | `CLOUDFLARE_ACCOUNT_ID`, `REGIDI_WORKER_NAME`, `REGIDI_D1_NAME`, `REGIDI_D1_ID`, `REGIDI_RATE_NAMESPACE` | Explizite Cloudflare-Bereitstellungsziele |
 
-## Prüfungen
+## <picture><img src="assets/icons/check.svg" width="24" height="24" alt=""></picture> Prüfungen
 
 ```bash
 npm run check
@@ -128,7 +128,7 @@ npm run audit:deps
 
 `npm test` führt beide Builds und die automatisierten Tests aus. GitHub Actions und automatische Veröffentlichungs-Pipelines sind nicht erforderlich.
 
-## Bereitstellung und Sicherheitsgrenzen
+## <picture><img src="assets/icons/shield.svg" width="24" height="24" alt=""></picture> Bereitstellung und Sicherheitsgrenzen
 
 > **Sicherheitsumfang:** Dies ist ein Lehr- und Forschungs-PoC. Es verwendet fiktive Identitäten und simulierte Bank- und Flugvorgänge, führt keine KYC/KYB-Prüfung durch und ist kein zertifizierter Identitätsdienst. Öffentliche Installationen benötigen HTTPS und Cloudflare Turnstile. Bei Loopback-Entwicklung wird eine ausdrücklich aktivierte Einmal-Challenge eingesetzt.
 
@@ -137,17 +137,17 @@ npm run audit:deps
 - **Kryptografie:** Ausstellerschlüssel bleiben serverseitig. `.env`, `.dev.vars`, Datenbanken und private JWKs niemals committen.
 - **Verifikation:** Reales Turnstile muss für jede gehostete Installation separat geprüft werden. Lokale Tests simulieren Siteverify.
 
-## Richtlinien für unabhängige Installationen
+## <picture><img src="assets/icons/scale.svg" width="24" height="24" alt=""></picture> Richtlinien für unabhängige Installationen
 
 Die enthaltenen Datenschutz-, Nutzungs- und Sicherheitsrichtlinien gelten für die **offizielle Installation der Rounver Corp.** Unabhängige Betreiber müssen Betreiberangaben, Infrastruktur, Datenverarbeitung und rechtliche Pflichten anpassen.
 
-## Wartung und Beiträge
+## <picture><img src="assets/icons/users.svg" width="24" height="24" alt=""></picture> Wartung und Beiträge
 
 Der ursprüngliche Quellcode und die technische Dokumentation stehen unter [MIT](../LICENSE). Rounver Corp. pflegt ausschließlich das offizielle Upstream-Projekt. **Externe Pull Requests werden nicht angenommen**; Fehler können über [Issues](https://github.com/rounverr/regidi-poc/issues) gemeldet werden. MIT erlaubt Forks und Wiederverwendung ohne Verpflichtung, Änderungen zu übernehmen.
 
 Originale Logos und Grafiken dürfen **zusammen mit diesem PoC und mit Namensnennung** gemäß den [Drittanbieter- und Markenhinweisen](../THIRD_PARTY_NOTICES.md) weitergegeben werden. Schriften und Abhängigkeiten behalten ihre eigenen Lizenzen.
 
-## Mitwirkende
+## <picture><img src="assets/icons/award.svg" width="24" height="24" alt=""></picture> Mitwirkende
 
 Erstellt und gepflegt von **Rounver Corp.** im Rahmen von **Rounver Research**. [Rounver](https://rounver.com/) · [Regidi-ID](https://rounver.com/regidi-id) · [Official Lab](https://identity.rounver.com/).
 

@@ -12,13 +12,13 @@
 
 ---
 
-## プロジェクト概要
+## <picture><img src="assets/icons/book.svg" width="24" height="24" alt=""></picture> プロジェクト概要
 
 Regidi PoCは**Rounver Corp. / Rounver Research**によるオープンソースの研究用デモです。模擬操作を通じて、**AIエージェントの暗号学的ID**、**人による限定的な権限委譲**、**受信側での検証**を示します。Regidi-IDプロトコル全体の実装ではなく、認証済みの本番用ID基盤でもありません。
 
 **公式インタラクティブラボ:** https://identity.rounver.com/lab/ · **Regidi-ID概要:** https://rounver.com/regidi-id · **[技術ホワイトペーパー（DOI）](https://doi.org/10.5281/zenodo.24469990)**
 
-## デモで示す機能
+## <picture><img src="assets/icons/flask.svg" width="24" height="24" alt=""></picture> デモで示す機能
 
 - **ブラウザー内のP-256鍵。** 署名用秘密鍵はエクスポート不可として生成され、ブラウザーのタブに保持されます。
 - **署名付き権限委譲。** デモ発行者がサービス・操作・金額・期間で制限されたES256資格情報を発行します。
@@ -27,7 +27,7 @@ Regidi PoCは**Rounver Corp. / Rounver Research**によるオープンソース�
 - **状態を伴うセキュリティ。** 証明のアトミックな消費、リプレイ防止、委譲の置換、失効、有効期限を扱います。
 - **互換性のある2つの実行環境。** Node.js + ネイティブSQLite、またはCloudflare Workers + D1で、API・SQL・ドメインロジックを共有します。
 
-## アーキテクチャ
+## <picture><img src="assets/icons/layers.svg" width="24" height="24" alt=""></picture> アーキテクチャ
 
 ```mermaid
 flowchart TB
@@ -42,7 +42,7 @@ flowchart TB
     sqlite --> db2[("SQLite file")]
 ```
 
-## エンドツーエンドの流れ
+## <picture><img src="assets/icons/workflow.svg" width="24" height="24" alt=""></picture> エンドツーエンドの流れ
 
 ```mermaid
 sequenceDiagram
@@ -73,7 +73,7 @@ sequenceDiagram
     API->>DB: Record revocation
 ```
 
-## クイックスタート: Node.js + SQLite
+## <picture><img src="assets/icons/terminal.svg" width="24" height="24" alt=""></picture> クイックスタート: Node.js + SQLite
 
 **Node.js 24**が必要です。Node + SQLiteは最低**24.6**、すべてのツールを使う場合は**24.22以上**を推奨します。
 
@@ -90,7 +90,7 @@ npm run dev
 
 **http://127.0.0.1:8787/lab/** を開いてください。Cloudflareアカウントは不要です。ローカルチャレンジは`NODE_ENV=development`、`REGIDI_CHALLENGE=development`を設定し、リスナーを`127.0.0.1`にバインドした場合のみ動作します。
 
-## Cloudflare Workers + D1（任意）
+## <picture><img src="assets/icons/cloud.svg" width="24" height="24" alt=""></picture> Cloudflare Workers + D1（任意）
 
 ```bash
 npm ci
@@ -102,7 +102,7 @@ npm test
 
 Workerをローカルで操作するには、`.dev.vars.example`から`.dev.vars`を作成し、発行者用の別の鍵を生成し、ローカルホスト名に許可されたTurnstileウィジェットを設定します。ビルド時に`PUBLIC_TURNSTILE_SITE_KEY`と一致する`REGIDI_PUBLIC_ORIGIN`を渡し、`npm run dev:cloudflare`を実行してください。本番環境ではWorker、アカウント、D1、レートリミッターの明示的な設定が必要です。`.env.example`と`cloudflare.config.ts`を参照してください。事前検査は既存のデプロイ先を要求し、新しいインフラを自動作成しません。
 
-## 設定項目一覧
+## <picture><img src="assets/icons/settings.svg" width="24" height="24" alt=""></picture> 設定項目一覧
 
 | 変数 | 意味 |
 |---|---|
@@ -116,7 +116,7 @@ Workerをローカルで操作するには、`.dev.vars.example`から`.dev.vars
 | `REGIDI_ISSUER`, `REGIDI_AIR_AUDIENCE`, `REGIDI_BANK_AUDIENCE` | 任意の発行者IDと受信者識別子 |
 | `CLOUDFLARE_ACCOUNT_ID`, `REGIDI_WORKER_NAME`, `REGIDI_D1_NAME`, `REGIDI_D1_ID`, `REGIDI_RATE_NAMESPACE` | 明示的なCloudflareデプロイ先 |
 
-## 検証コマンド
+## <picture><img src="assets/icons/check.svg" width="24" height="24" alt=""></picture> 検証コマンド
 
 ```bash
 npm run check
@@ -128,7 +128,7 @@ npm run audit:deps
 
 `npm test`は両方のビルドと自動テストを実行します。GitHub Actionsや自動公開パイプラインは必須ではありません。
 
-## デプロイとセキュリティ上の制約
+## <picture><img src="assets/icons/shield.svg" width="24" height="24" alt=""></picture> デプロイとセキュリティ上の制約
 
 > **セキュリティの対象範囲:** これは教育用PoCです。架空のIDと模擬的な銀行・航空会社の操作を使用し、KYC/KYBは実施しません。認証済みのIDサービスとして使用できません。公開環境にはHTTPSとCloudflare Turnstileが必要です。ローカル開発では明示的に有効化された使い捨てチャレンジを使用します。
 
@@ -137,17 +137,17 @@ npm run audit:deps
 - **暗号処理:** 発行者の鍵はサーバー側に保持されます。`.env`、`.dev.vars`、データベース、生成された秘密JWKをコミットしないでください。
 - **検証:** 本番のTurnstile連携には運用者ごとの検証が必要です。ローカルの自動テストはSiteverifyを模擬します。
 
-## 独立運用時のポリシー
+## <picture><img src="assets/icons/scale.svg" width="24" height="24" alt=""></picture> 独立運用時のポリシー
 
 同梱のプライバシー・利用規約・セキュリティポリシーは、**Rounver Corp.が運用する公式環境**に適用されます。独立運用者は、運営者の情報、インフラ、データ処理、法的義務に合わせて変更する必要があります。
 
-## 保守とコントリビューション
+## <picture><img src="assets/icons/users.svg" width="24" height="24" alt=""></picture> 保守とコントリビューション
 
 オリジナルのソフトウェアと技術文書は[MIT](../LICENSE)ライセンスです。公式プロジェクトはRounver Corp.が単独で保守します。**外部のプルリクエストは受け付けません**。不具合は[Issues](https://github.com/rounverr/regidi-poc/issues)で報告できます。MITは条件に従ったフォークと再利用を認めますが、公式側に変更の採用義務はありません。
 
 オリジナルのロゴと画像は、[サードパーティ・ブランド表記](../THIRD_PARTY_NOTICES.md)に従い**このPoCとともに帰属表示付きで**再配布できます。フォントと依存ライブラリにはそれぞれのライセンスが適用されます。
 
-## クレジット
+## <picture><img src="assets/icons/award.svg" width="24" height="24" alt=""></picture> クレジット
 
 **Rounver Corp.**が**Rounver Research**を通じて開発・保守しています。 [Rounver](https://rounver.com/) · [Regidi-ID](https://rounver.com/regidi-id) · [Official Lab](https://identity.rounver.com/).
 

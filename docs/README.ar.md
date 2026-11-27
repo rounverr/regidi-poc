@@ -12,13 +12,13 @@
 
 ---
 
-## حول المشروع
+## <picture><img src="assets/icons/book.svg" width="24" height="24" alt=""></picture> حول المشروع
 
 Regidi PoC عرض بحثي مفتوح المصدر من **Rounver Corp. / Rounver Research**. يستكشف **الهوية المشفّرة لوكلاء الذكاء الاصطناعي** و**التفويض البشري محدود النطاق** و**التحقق لدى الجهة المستقبِلة** باستخدام عمليات محاكاة. لا يمثل بروتوكول Regidi-ID الكامل ولا منصة هوية معتمدة للإنتاج.
 
 **المختبر التفاعلي الرسمي:** https://identity.rounver.com/lab/ · **نظرة عامة على Regidi-ID:** https://rounver.com/regidi-id · **[الورقة البيضاء التقنية (DOI)](https://doi.org/10.5281/zenodo.24469990)**
 
-## ما الذي يوضحه؟
+## <picture><img src="assets/icons/flask.svg" width="24" height="24" alt=""></picture> ما الذي يوضحه؟
 
 - **مفاتيح P-256 في المتصفح.** يُنشأ مفتاح التوقيع الخاص بحيث لا يمكن تصديره ويبقى داخل علامة تبويب المتصفح.
 - **تفويض موقّع.** يُصدر مُصدِر تجريبي بيانات اعتماد ES256 مقيّدة بالخدمة والعملية والمبلغ والمدة.
@@ -27,7 +27,7 @@ Regidi PoC عرض بحثي مفتوح المصدر من **Rounver Corp. / Rounve
 - **أمان مع حالة محفوظة.** استهلاك الإثباتات بشكل ذري، ومنع إعادة الاستخدام، واستبدال التفويض، والإلغاء، وانتهاء الصلاحية.
 - **بيئتا تشغيل متوافقتان.** Node.js مع SQLite الأصلي أو Cloudflare Workers مع D1، مع مشاركة API واستعلامات SQL ومنطق المجال.
 
-## البنية المعمارية
+## <picture><img src="assets/icons/layers.svg" width="24" height="24" alt=""></picture> البنية المعمارية
 
 ```mermaid
 flowchart TB
@@ -42,7 +42,7 @@ flowchart TB
     sqlite --> db2[("SQLite file")]
 ```
 
-## التسلسل الكامل
+## <picture><img src="assets/icons/workflow.svg" width="24" height="24" alt=""></picture> التسلسل الكامل
 
 ```mermaid
 sequenceDiagram
@@ -73,7 +73,7 @@ sequenceDiagram
     API->>DB: Record revocation
 ```
 
-## البدء السريع: Node.js + SQLite
+## <picture><img src="assets/icons/terminal.svg" width="24" height="24" alt=""></picture> البدء السريع: Node.js + SQLite
 
 يتطلب **Node.js 24**. تحتاج بيئة Node + SQLite إلى **24.6** على الأقل، ويُنصح باستخدام **24.22+** لتشغيل مجموعة الأدوات الكاملة.
 
@@ -90,7 +90,7 @@ npm run dev
 
 افتح **http://127.0.0.1:8787/lab/**. لا تحتاج إلى حساب Cloudflare. يعمل التحدي المحلي فقط مع `NODE_ENV=development` و`REGIDI_CHALLENGE=development` وعند ربط الخادم بـ`127.0.0.1`.
 
-## Cloudflare Workers + D1 (اختياري)
+## <picture><img src="assets/icons/cloud.svg" width="24" height="24" alt=""></picture> Cloudflare Workers + D1 (اختياري)
 
 ```bash
 npm ci
@@ -102,7 +102,7 @@ npm test
 
 لتشغيل Worker محلياً، أنشئ `.dev.vars` انطلاقاً من `.dev.vars.example`، وولّد مفتاحاً مستقلاً للمُصدِر، واضبط أداة Turnstile مسموحاً لها باستخدام اسم المضيف المحلي. أدخل `PUBLIC_TURNSTILE_SITE_KEY` أثناء البناء واضبط `REGIDI_PUBLIC_ORIGIN` المطابق. ثم شغّل `npm run dev:cloudflare`. يتطلب النشر الإنتاجي قيماً صريحة لـWorker والحساب وD1 ومحدد المعدل؛ راجع `.env.example` و`cloudflare.config.ts`. يتحقق فحص ما قبل النشر من وجود الوجهة مسبقاً ولا ينشئ موارد البنية التحتية.
 
-## مرجع الإعدادات
+## <picture><img src="assets/icons/settings.svg" width="24" height="24" alt=""></picture> مرجع الإعدادات
 
 | المتغير | المعنى |
 |---|---|
@@ -116,7 +116,7 @@ npm test
 | `REGIDI_ISSUER`, `REGIDI_AIR_AUDIENCE`, `REGIDI_BANK_AUDIENCE` | معرّفات اختيارية للمُصدِر والجمهور |
 | `CLOUDFLARE_ACCOUNT_ID`, `REGIDI_WORKER_NAME`, `REGIDI_D1_NAME`, `REGIDI_D1_ID`, `REGIDI_RATE_NAMESPACE` | وجهات النشر الصريحة في Cloudflare |
 
-## التحقق والاختبارات
+## <picture><img src="assets/icons/check.svg" width="24" height="24" alt=""></picture> التحقق والاختبارات
 
 ```bash
 npm run check
@@ -128,7 +128,7 @@ npm run audit:deps
 
 يشغّل `npm test` عمليتي البناء ومجموعات الاختبارات الآلية. لا تُعد GitHub Actions أو مسارات النشر التلقائي شرطاً.
 
-## النشر وحدود الأمان
+## <picture><img src="assets/icons/shield.svg" width="24" height="24" alt=""></picture> النشر وحدود الأمان
 
 > **نطاق الأمان:** هذا نموذج توضيحي تعليمي. يستخدم هويات خيالية وعمليات محاكاة للبنوك والطيران، ولا ينفذ إجراءات KYC/KYB، ولا ينبغي اعتباره خدمة هوية معتمدة. تتطلب النسخ العامة HTTPS وCloudflare Turnstile. ويستخدم التطوير المحلي تحدياً أحادي الاستخدام مفعّلاً صراحةً.
 
@@ -137,17 +137,17 @@ npm run audit:deps
 - **التشفير:** تبقى مفاتيح المُصدِر على الخادم. لا تُضف ملفات `.env` أو `.dev.vars` أو قواعد البيانات أو مفاتيح JWK الخاصة إلى المستودع.
 - **التحقق:** تحتاج استضافة Turnstile الحقيقية إلى اختبار خاص بالمشغّل. تحاكي الاختبارات المحلية Siteverify.
 
-## السياسات للنسخ المستقلة
+## <picture><img src="assets/icons/scale.svg" width="24" height="24" alt=""></picture> السياسات للنسخ المستقلة
 
 تنطبق سياسات الخصوصية وشروط الاستخدام والأمان المرفقة على **التثبيت الرسمي الذي تديره Rounver Corp.** ويجب على المشغلين المستقلين تعديلها لتعكس هوية المشغّل والبنية التحتية ومعالجة البيانات والالتزامات القانونية.
 
-## الصيانة والمساهمات
+## <picture><img src="assets/icons/users.svg" width="24" height="24" alt=""></picture> الصيانة والمساهمات
 
 البرنامج الأصلي والوثائق التقنية مرخّصان بموجب [MIT](../LICENSE). تتولى Rounver Corp. وحدها صيانة المشروع الرسمي. **لا تُقبل طلبات السحب الخارجية**؛ ويمكن الإبلاغ عن الأخطاء عبر [Issues](https://github.com/rounverr/regidi-poc/issues). تسمح MIT بالنسخ المتفرعة وإعادة الاستخدام دون إلزام المشروع الرسمي بدمج التغييرات.
 
 يمكن إعادة توزيع الشعارات والرسومات الأصلية **مع هذا النموذج ومع نسبتها إلى الجهة المالكة** وفق [إشعارات الأطراف الثالثة والعلامات التجارية](../THIRD_PARTY_NOTICES.md). تبقى تراخيص الخطوط والتبعيات سارية.
 
-## الاعتمادات
+## <picture><img src="assets/icons/award.svg" width="24" height="24" alt=""></picture> الاعتمادات
 
 أنشأته وتديره **Rounver Corp.** من خلال **Rounver Research**. [Rounver](https://rounver.com/) · [Regidi-ID](https://rounver.com/regidi-id) · [Official Lab](https://identity.rounver.com/).
 

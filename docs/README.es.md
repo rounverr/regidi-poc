@@ -12,13 +12,13 @@
 
 ---
 
-## Acerca del proyecto
+## <picture><img src="assets/icons/book.svg" width="24" height="24" alt=""></picture> Acerca del proyecto
 
 Regidi PoC es una demostración de investigación de código abierto creada por **Rounver Corp. / Rounver Research**. Explora la **identidad criptográfica de agentes de IA**, la **delegación humana limitada** y la **verificación por parte del receptor** mediante operaciones simuladas. No representa la implementación completa del protocolo Regidi-ID ni una plataforma de identidad productiva certificada.
 
 **Laboratorio interactivo oficial:** https://identity.rounver.com/lab/ · **Descripción general de Regidi-ID:** https://rounver.com/regidi-id · **[White Paper técnico (DOI)](https://doi.org/10.5281/zenodo.24469990)**
 
-## Qué demuestra
+## <picture><img src="assets/icons/flask.svg" width="24" height="24" alt=""></picture> Qué demuestra
 
 - **Claves P-256 en el navegador.** La clave privada de firma se genera como una clave no exportable y permanece en la pestaña.
 - **Delegación firmada.** Un emisor de demostración entrega credenciales ES256 restringidas por servicio, operación, monto y duración.
@@ -27,7 +27,7 @@ Regidi PoC es una demostración de investigación de código abierto creada por 
 - **Seguridad con estado.** Consumo atómico de pruebas, prevención de reutilización de pruebas, reemplazo de delegaciones, revocación y expiración.
 - **Dos entornos de ejecución compatibles.** Node.js con SQLite nativo o Cloudflare Workers con D1, que comparten API, SQL y lógica de dominio.
 
-## Arquitectura
+## <picture><img src="assets/icons/layers.svg" width="24" height="24" alt=""></picture> Arquitectura
 
 ```mermaid
 flowchart TB
@@ -42,7 +42,7 @@ flowchart TB
     sqlite --> db2[("SQLite file")]
 ```
 
-## Flujo completo
+## <picture><img src="assets/icons/workflow.svg" width="24" height="24" alt=""></picture> Flujo completo
 
 ```mermaid
 sequenceDiagram
@@ -73,7 +73,7 @@ sequenceDiagram
     API->>DB: Record revocation
 ```
 
-## Inicio rápido: Node.js + SQLite
+## <picture><img src="assets/icons/terminal.svg" width="24" height="24" alt=""></picture> Inicio rápido: Node.js + SQLite
 
 Requiere **Node.js 24**. Node + SQLite necesita al menos **24.6** y se recomienda **24.22+** para todas las herramientas.
 
@@ -90,7 +90,7 @@ npm run dev
 
 Abra **http://127.0.0.1:8787/lab/**. No es necesario disponer de una cuenta de Cloudflare. El desafío local solo funciona con `NODE_ENV=development`, `REGIDI_CHALLENGE=development` y el servidor enlazado a `127.0.0.1`.
 
-## Cloudflare Workers + D1 (opcional)
+## <picture><img src="assets/icons/cloud.svg" width="24" height="24" alt=""></picture> Cloudflare Workers + D1 (opcional)
 
 ```bash
 npm ci
@@ -102,7 +102,7 @@ npm test
 
 Para ejecutar Workers localmente, configure `.dev.vars` a partir de `.dev.vars.example`, genere una clave nueva para el emisor y configure un componente Turnstile autorizado para el nombre de host local. Proporcione `PUBLIC_TURNSTILE_SITE_KEY` durante el proceso de compilación y el `REGIDI_PUBLIC_ORIGIN` correspondiente. Después, ejecute `npm run dev:cloudflare`. Los despliegues productivos requieren identificadores explícitos de Worker, cuenta, D1 y limitador; consulte `.env.example` y `cloudflare.config.ts`. La verificación previa al despliegue exige un destino existente y no aprovisiona infraestructura.
 
-## Referencia de configuración
+## <picture><img src="assets/icons/settings.svg" width="24" height="24" alt=""></picture> Referencia de configuración
 
 | Variable | Significado |
 |---|---|
@@ -116,7 +116,7 @@ Para ejecutar Workers localmente, configure `.dev.vars` a partir de `.dev.vars.e
 | `REGIDI_ISSUER`, `REGIDI_AIR_AUDIENCE`, `REGIDI_BANK_AUDIENCE` | Identificadores opcionales de emisor y audiencias |
 | `CLOUDFLARE_ACCOUNT_ID`, `REGIDI_WORKER_NAME`, `REGIDI_D1_NAME`, `REGIDI_D1_ID`, `REGIDI_RATE_NAMESPACE` | Destinos explícitos del despliegue Cloudflare |
 
-## Verificaciones
+## <picture><img src="assets/icons/check.svg" width="24" height="24" alt=""></picture> Verificaciones
 
 ```bash
 npm run check
@@ -128,7 +128,7 @@ npm run audit:deps
 
 `npm test` ejecuta ambos procesos de compilación y los conjuntos de pruebas automatizadas. No se requieren GitHub Actions ni procesos automáticos de publicación.
 
-## Despliegue y limitaciones de seguridad
+## <picture><img src="assets/icons/shield.svg" width="24" height="24" alt=""></picture> Despliegue y limitaciones de seguridad
 
 > **Alcance de seguridad:** Este es un PoC educativo. Utiliza identidades ficticias y operaciones bancarias y aéreas simuladas, no realiza KYC/KYB y no debe tratarse como un servicio de identidad certificado. Las instalaciones públicas requieren HTTPS y Cloudflare Turnstile. El desarrollo en la interfaz de retorno local utiliza un mecanismo de desafío de un solo uso habilitado expresamente.
 
@@ -137,17 +137,17 @@ npm run audit:deps
 - **Criptografía:** Las claves del emisor permanecen en el servidor. No incluya `.env`, `.dev.vars`, archivos de base de datos ni claves JWK privadas generadas.
 - **Verificación:** Turnstile real en instalaciones públicas requiere validación específica del operador. Las pruebas locales simulan Siteverify.
 
-## Políticas para instalaciones independientes
+## <picture><img src="assets/icons/scale.svg" width="24" height="24" alt=""></picture> Políticas para instalaciones independientes
 
 Las políticas de privacidad, condiciones de uso y seguridad incluidas corresponden a la **instalación oficial operada por Rounver Corp.** Los operadores independientes deben adaptarlas a su identidad, infraestructura, tratamiento de datos y obligaciones legales.
 
-## Mantenimiento y contribuciones
+## <picture><img src="assets/icons/users.svg" width="24" height="24" alt=""></picture> Mantenimiento y contribuciones
 
 El software original y su documentación técnica se distribuyen bajo [MIT](../LICENSE). Rounver Corp. mantiene exclusivamente el proyecto oficial. **No se aceptan solicitudes de incorporación de cambios (pull requests) de terceros**; es posible informar sobre errores mediante [Issues](https://github.com/rounverr/regidi-poc/issues). MIT permite bifurcaciones del repositorio (forks) y la reutilización según sus términos, sin obligar al proyecto oficial a incorporar cambios.
 
 Los logos y gráficos originales pueden redistribuirse **junto con este PoC y con atribución**, según los [avisos de terceros y marcas](../THIRD_PARTY_NOTICES.md). Se mantienen las licencias correspondientes a las fuentes y dependencias.
 
-## Créditos
+## <picture><img src="assets/icons/award.svg" width="24" height="24" alt=""></picture> Créditos
 
 Creado y mantenido por **Rounver Corp.** mediante **Rounver Research**. [Rounver](https://rounver.com/) · [Regidi-ID](https://rounver.com/regidi-id) · [Official Lab](https://identity.rounver.com/).
 

@@ -12,13 +12,13 @@
 
 ---
 
-## परियोजना के बारे में
+## <picture><img src="assets/icons/book.svg" width="24" height="24" alt=""></picture> परियोजना के बारे में
 
 Regidi PoC, **Rounver Corp. / Rounver Research** द्वारा निर्मित ओपन-सोर्स अनुसंधान डेमो है। यह सिम्युलेटेड कार्रवाइयों के माध्यम से **AI एजेंट की क्रिप्टोग्राफ़िक पहचान**, **सीमित मानव प्रत्यायोजन** और **प्राप्तकर्ता द्वारा सत्यापन** समझाता है। यह संपूर्ण Regidi-ID प्रोटोकॉल या प्रमाणित उत्पादन पहचान प्लेटफ़ॉर्म नहीं है।
 
 **आधिकारिक इंटरैक्टिव लैब:** https://identity.rounver.com/lab/ · **Regidi-ID का परिचय:** https://rounver.com/regidi-id · **[तकनीकी श्वेतपत्र (DOI)](https://doi.org/10.5281/zenodo.24469990)**
 
-## यह क्या दर्शाती है
+## <picture><img src="assets/icons/flask.svg" width="24" height="24" alt=""></picture> यह क्या दर्शाती है
 
 - **ब्राउज़र में P-256 कुंजियाँ।** निजी हस्ताक्षर कुंजी गैर-निर्यात योग्य बनाई जाती है और ब्राउज़र टैब में रहती है।
 - **हस्ताक्षरित प्रत्यायोजन।** डेमो जारीकर्ता सेवा, कार्रवाई, राशि और अवधि से सीमित ES256 प्रमाणपत्र जारी करता है।
@@ -27,7 +27,7 @@ Regidi PoC, **Rounver Corp. / Rounver Research** द्वारा निर्
 - **स्थिति-आधारित सुरक्षा।** प्रमाण का परमाणु उपभोग, replay रोकथाम, प्रत्यायोजन बदलना, रद्दीकरण और समाप्ति।
 - **दो संगत रनटाइम।** Node.js + देशी SQLite या Cloudflare Workers + D1; API, SQL और डोमेन लॉजिक साझा हैं।
 
-## आर्किटेक्चर
+## <picture><img src="assets/icons/layers.svg" width="24" height="24" alt=""></picture> आर्किटेक्चर
 
 ```mermaid
 flowchart TB
@@ -42,7 +42,7 @@ flowchart TB
     sqlite --> db2[("SQLite file")]
 ```
 
-## शुरू से अंत तक प्रक्रिया
+## <picture><img src="assets/icons/workflow.svg" width="24" height="24" alt=""></picture> शुरू से अंत तक प्रक्रिया
 
 ```mermaid
 sequenceDiagram
@@ -73,7 +73,7 @@ sequenceDiagram
     API->>DB: Record revocation
 ```
 
-## त्वरित शुरुआत: Node.js + SQLite
+## <picture><img src="assets/icons/terminal.svg" width="24" height="24" alt=""></picture> त्वरित शुरुआत: Node.js + SQLite
 
 **Node.js 24** आवश्यक है। Node + SQLite के लिए न्यूनतम **24.6** चाहिए; पूर्ण टूलचेन के लिए **24.22+** सुझाया जाता है।
 
@@ -90,7 +90,7 @@ npm run dev
 
 **http://127.0.0.1:8787/lab/** खोलें। Cloudflare खाते की आवश्यकता नहीं है। स्थानीय चुनौती केवल `NODE_ENV=development`, `REGIDI_CHALLENGE=development` और `127.0.0.1` पर बंधे लिसनर के साथ काम करती है।
 
-## Cloudflare Workers + D1 (वैकल्पिक)
+## <picture><img src="assets/icons/cloud.svg" width="24" height="24" alt=""></picture> Cloudflare Workers + D1 (वैकल्पिक)
 
 ```bash
 npm ci
@@ -102,7 +102,7 @@ npm test
 
 स्थानीय Worker के लिए `.dev.vars.example` से `.dev.vars` बनाएँ, जारीकर्ता की अलग कुंजी उत्पन्न करें और स्थानीय होस्टनाम के लिए अधिकृत Turnstile विजेट सेट करें। बिल्ड के दौरान `PUBLIC_TURNSTILE_SITE_KEY` और उससे मेल खाता `REGIDI_PUBLIC_ORIGIN` प्रदान करें। फिर `npm run dev:cloudflare` चलाएँ। उत्पादन डिप्लॉयमेंट में Worker, खाता, D1 और लिमिटर के स्पष्ट मान आवश्यक हैं; `.env.example` तथा `cloudflare.config.ts` देखें। प्रीफ़्लाइट पहले से मौजूद लक्ष्य की माँग करता है और स्वयं इन्फ्रास्ट्रक्चर नहीं बनाता।
 
-## कॉन्फ़िगरेशन संदर्भ
+## <picture><img src="assets/icons/settings.svg" width="24" height="24" alt=""></picture> कॉन्फ़िगरेशन संदर्भ
 
 | वेरिएबल | अर्थ |
 |---|---|
@@ -116,7 +116,7 @@ npm test
 | `REGIDI_ISSUER`, `REGIDI_AIR_AUDIENCE`, `REGIDI_BANK_AUDIENCE` | वैकल्पिक जारीकर्ता और श्रोता पहचानकर्ता |
 | `CLOUDFLARE_ACCOUNT_ID`, `REGIDI_WORKER_NAME`, `REGIDI_D1_NAME`, `REGIDI_D1_ID`, `REGIDI_RATE_NAMESPACE` | स्पष्ट Cloudflare डिप्लॉयमेंट लक्ष्य |
 
-## जाँच
+## <picture><img src="assets/icons/check.svg" width="24" height="24" alt=""></picture> जाँच
 
 ```bash
 npm run check
@@ -128,7 +128,7 @@ npm run audit:deps
 
 `npm test` दोनों बिल्ड और स्वचालित परीक्षण चलाता है। GitHub Actions या स्वचालित प्रकाशन पाइपलाइन आवश्यक नहीं हैं।
 
-## डिप्लॉयमेंट और सुरक्षा सीमाएँ
+## <picture><img src="assets/icons/shield.svg" width="24" height="24" alt=""></picture> डिप्लॉयमेंट और सुरक्षा सीमाएँ
 
 > **सुरक्षा का दायरा:** यह शैक्षिक PoC है। इसमें काल्पनिक पहचान और नकली बैंक/एयरलाइन संचालन हैं; यह KYC/KYB नहीं करता और प्रमाणित पहचान सेवा नहीं है। सार्वजनिक इंस्टॉलेशन में HTTPS और Cloudflare Turnstile आवश्यक हैं। स्थानीय loopback विकास में स्पष्ट रूप से सक्षम की गई एकबारगी चुनौती उपयोग होती है।
 
@@ -137,17 +137,17 @@ npm run audit:deps
 - **क्रिप्टोग्राफ़ी:** जारीकर्ता कुंजियाँ सर्वर पर रहती हैं। `.env`, `.dev.vars`, डेटाबेस या निजी JWK को कभी कमिट न करें।
 - **सत्यापन:** वास्तविक होस्टेड Turnstile एकीकरण का ऑपरेटर द्वारा अलग परीक्षण आवश्यक है। स्थानीय स्वचालित परीक्षण Siteverify का अनुकरण करते हैं।
 
-## स्वतंत्र इंस्टॉलेशन की नीतियाँ
+## <picture><img src="assets/icons/scale.svg" width="24" height="24" alt=""></picture> स्वतंत्र इंस्टॉलेशन की नीतियाँ
 
 शामिल गोपनीयता नीति, उपयोग की शर्तें और सुरक्षा नीति **Rounver Corp. द्वारा संचालित आधिकारिक इंस्टॉलेशन** पर लागू होती हैं। स्वतंत्र ऑपरेटर को अपनी पहचान, इन्फ्रास्ट्रक्चर, डेटा प्रसंस्करण और कानूनी जिम्मेदारियों के अनुसार इन्हें बदलना होगा।
 
-## रखरखाव और योगदान
+## <picture><img src="assets/icons/users.svg" width="24" height="24" alt=""></picture> रखरखाव और योगदान
 
 मूल सॉफ़्टवेयर और तकनीकी दस्तावेज़ [MIT](../LICENSE) के तहत हैं। आधिकारिक परियोजना का रखरखाव केवल Rounver Corp. करती है। **बाहरी pull requests स्वीकार नहीं हैं**; समस्याएँ [Issues](https://github.com/rounverr/regidi-poc/issues) पर बताई जा सकती हैं। MIT अपनी शर्तों के तहत forks और पुनः उपयोग की अनुमति देता है, बिना मुख्य परियोजना पर बदलाव अपनाने की बाध्यता के।
 
 मूल लोगो और ग्राफ़िक्स **इस PoC के साथ श्रेय देकर** [तृतीय-पक्ष और ब्रांड नोटिस](../THIRD_PARTY_NOTICES.md) के अनुसार बाँटे जा सकते हैं। फ़ॉन्ट और निर्भरताओं के अलग लाइसेंस लागू रहते हैं।
 
-## श्रेय
+## <picture><img src="assets/icons/award.svg" width="24" height="24" alt=""></picture> श्रेय
 
 **Rounver Corp.** ने **Rounver Research** के माध्यम से इसे बनाया और इसका रखरखाव करती है। [Rounver](https://rounver.com/) · [Regidi-ID](https://rounver.com/regidi-id) · [Official Lab](https://identity.rounver.com/).
 
